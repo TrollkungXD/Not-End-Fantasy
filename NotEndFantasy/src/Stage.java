@@ -195,8 +195,8 @@ public class Stage {
                       new EnemyMove.Afflict("Sticky Web", 0, false, EnemyMove.Ailment.BLIND, 0, 3, 85, false, 1),
                       new EnemyMove.Charge("Devour", 1.4, false, 1), new EnemyMove.Sweep("Tail Sweep", 0.7, false, 1)));
         s.layout(new String[]{"X", "M", "M E M", "E E M", "E M", "S R", "M", "M E", "R E E", "M E", "E S", "E M E", "R E M", "B"}, 11, 12, pool(1,
-            new Event.Trap("Thorn Thicket", "Black thorns block the path ahead.", 10),
-            new Event.Trap("Bear Trap", "You spot a rusty bear trap half buried in the leaves.", 15),
+            new Event.Trap("Thorn Thicket", "Black thorns block the path ahead.", 5),
+            new Event.Trap("Bear Trap", "You spot a rusty bear trap half buried in the leaves.", 10),
             new Event.Chest("Hollow Log", "Something glints inside a hollow log.", 20),
             new Event.Shrine("Mossy Spring", "Cool, clear water bubbles out from the moss.", 0.25),
             new Event.Thief("Goblin Pickpocket", "A goblin snatches your coin purse and runs!", 18),
@@ -270,8 +270,8 @@ public class Stage {
                       new EnemyMove.Guard("Storm Shield", 2, 4, false, 2)));
         s.layout(new String[]{"X", "M", "M E", "E M", "M", "R E", "M E", "S", "E M M", "E M", "R E M", "E E", "M S M", "B"}, 22, 18, pool(2,
             new Event.Trap("Falling Icicles", "Huge icicles hang from the ceiling above the hall.", 10),
-            new Event.Trap("Frozen Floor", "The floor ahead is slick black ice.", 25),
-            new Event.Chest("Frozen Treasure", "A chest is sealed inside a block of ice.", 30),
+            new Event.Trap("Frozen Floor", "The floor ahead is slick black ice.", 10),
+            new Event.Chest("Frozen Treasure", "A chest is sealed inside a block of ice.", 15),
             new Event.Shrine("Warm Hearth", "A fireplace still burns in an empty room.", 0.25),
             new Event.Thief("Ice Imp", "A tiny imp snatches your purse and slides away!", 25),
             new Event.Ambush("Castle Guard", "Frozen suits of armor creak to life!"),
@@ -331,7 +331,7 @@ public class Stage {
                       new EnemyMove.Weaken("Despair", 3, 2, 3)));
         s.layout(new String[]{"X", "M", "M E", "M M", "E", "S M", "M E M", "R E", "E M", "E M", "M R M", "S M", "E E", "M E E", "R M", "E M S", "B"}, 33, 24, pool(3,
             new Event.Trap("Lava Burst", "The ground ahead glows and bubbles.", 15),
-            new Event.Trap("Collapsing Pillar", "A burnt pillar leans over the path, ready to fall.", 10),
+            new Event.Trap("Collapsing Pillar", "A burnt pillar leans over the path, ready to fall.", 20),
             new Event.Chest("Prophet's Coffer", "A blackened coffer survived the fire.", 40),
             new Event.Shrine("Ember Altar", "Warm embers flicker on an ancient altar.", 0.25),
             new Event.Thief("Ash Imp", "A sooty imp pulls coins from your bag!", 30),

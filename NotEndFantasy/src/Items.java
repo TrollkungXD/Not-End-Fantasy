@@ -3,11 +3,11 @@ import java.util.*;
 /** Item catalogue. */
 public final class Items {
     private Items() {}
-    public static final Item POTION = new Item.Heal("Potion", "Most wounded ally restores 15 HP.", 25, 15);
-    public static final Item HI_POTION = new Item.Heal("Hi-Potion", "Most wounded ally restores 30 HP.", 50, 30);
-    public static final Item ELIXIR = new Item.PartyHeal("Elixir", "Every ally restores 20 HP.", 40, 20);
+    public static final Item POTION = new Item.Heal("Potion", "Most wounded ally restores 20 HP.", 25, 20);
+    public static final Item HI_POTION = new Item.Heal("Hi-Potion", "Most wounded ally restores 30 HP.", 50, 40);
+    public static final Item ELIXIR = new Item.PartyHeal("Elixir", "Every ally restores 20 HP.", 50, 20);
     public static final Item PHOENIX = new Item.Revive("Phoenix Feather", "Revive a fallen ally with 60% HP.", 150, 0.6);
-    public static final Item ANTIDOTE = new Item.Cleanse("Antidote", "Cure ALL bad effects on the party, +5 HP each.", 20, 5);
+    public static final Item ANTIDOTE = new Item.Cleanse("Antidote", "Cure ALL bad effects on the party, +5 HP each.", 25, 10);
     public static final Item BOMB = new Item.Bomb("Bomb", "15 damage to one enemy (ignores DEF).", 30, 15);
     public static final Item MEGA_BOMB = new Item.MegaBomb("Mega Bomb", "10 damage to ALL enemies (ignores DEF).", 60, 10);
     public static final Item ETHER = new Item.Ether("Ether", "Reset all skill cooldowns of the user.", 60);
@@ -27,7 +27,7 @@ public final class Items {
         new Item.Tonic("Arcane Dust", "Permanently M.ATK +1.", 90, Hero.Stat.MATK),
         new Item.Tonic("Iron Charm", "Permanently DEF +1 (max 10).", 70, Hero.Stat.DEF),
         new Item.Tonic("Spirit Charm", "Permanently M.DEF +1 (max 10).", 70, Hero.Stat.MDEF),
-        new Item.Tonic("Vital Fruit", "Permanently Max HP +5.", 110, Hero.Stat.HP));
+        new Item.Tonic("Vital Fruit", "Permanently Max HP +5.", 100, Hero.Stat.HP));
 
     public static List<Item> tonics() { return TONICS; }
     public static List<Item> specials() { return SPECIALS; }
