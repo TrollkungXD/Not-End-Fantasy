@@ -69,6 +69,7 @@ public final class Assets {
         SPRITES.put("Miguel", "MD_MIGUEL.gif");
         SPRITES.put("Red Pitaya", "PITAYA_R.gif");
         SPRITES.put("Ancient Tree", "Boss_ANCIENT_TREE.gif");
+        SPRITES.put("Lord Of Mysterious", "Boss_ANCIENT_TREE.gif");   // secret stage boss (Primal Forest)
         SPRITES.put("Evil Huntress", "4_F_HUNTER_EVIL.gif");
         SPRITES.put("Drake", "4_M_DRAKE.gif");
         SPRITES.put("Minorous", "E_MINOROUS.gif");

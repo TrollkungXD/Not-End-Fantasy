@@ -438,24 +438,20 @@ public abstract class Skill {
         }
     }
 
-    /** Phantom - Phantom in the Mirror: shadow clone, cleanse + ATK up for the party, chance to BLIND every enemy. */
+    /** Phantom - Phantom in the Mirror: cleanse + ATK up for the party, chance to BLIND every enemy. */
     public static class MirrorNight extends Skill {
-        private final int cloneTurns, atkUp, atkTurns, blindChance, blindTurns;
-        public MirrorNight(String name, String desc, int cd, int cloneTurns, int atkUp, int atkTurns, int blindChance, int blindTurns) {
+        private final int atkUp, atkTurns, blindChance, blindTurns;
+        public MirrorNight(String name, String desc, int cd, int atkUp, int atkTurns, int blindChance, int blindTurns) {
             super(name, desc, cd, Target.PARTY);
-            this.cloneTurns = cloneTurns; this.atkUp = atkUp; this.atkTurns = atkTurns; this.blindChance = blindChance; this.blindTurns = blindTurns;
+            this.atkUp = atkUp; this.atkTurns = atkTurns; this.blindChance = blindChance; this.blindTurns = blindTurns;
         }
         @Override protected String apply(Hero user, Enemy chosen, Hero ally, List<Enemy> enemies, List<Hero> party) {
             List<Hero> hs = affected(user, ally, party);
-            for (Hero h : hs) h.cleanse();
-            int d = user.getAtk() / 3;                            // clone damage: ATK after cleansing, before the ATK up
-            user.giveClone(d, cloneTurns);
-            for (Hero h : hs) h.giveAtkUp(atkUp, atkTurns);
+            for (Hero h : hs) { h.cleanse(); h.giveAtkUp(atkUp, atkTurns); }
             List<String> blinded = new ArrayList<>();
             for (Enemy e : living(enemies))
                 if (RNG.nextInt(100) < blindChance) { e.giveBlind(blindTurns); blinded.add(e.getName()); }
-            return head(user) + "a shadow clone appears for " + cloneTurns + " turns (+" + d + " damage per attack). "
-                    + "Party cleansed, ATK +" + atkUp + " for " + atkTurns + " turns. "
+            return head(user) + "Party cleansed, ATK +" + atkUp + " for " + atkTurns + " turns. "
                     + (blinded.isEmpty() ? "No enemy was blinded." : "BLIND: " + String.join(", ", blinded) + ".");
         }
     }
@@ -750,13 +746,13 @@ public abstract class Skill {
 
     /** Phantom - Bloody Opus: for the rest of the battle his Attack hits several random enemies with more ATK. */
     public static class Opus extends Skill {
-        private final int targets, atk;
-        public Opus(String name, String desc, int cd, int targets, int atk) { super(name, desc, cd, Target.SELF); this.targets = targets; this.atk = atk; }
+        private final int targets, atk, turns;
+        public Opus(String name, String desc, int cd, int targets, int atk, int turns) { super(name, desc, cd, Target.SELF); this.targets = targets; this.atk = atk; this.turns = turns; }
         @Override public boolean canUse(Hero user, List<Hero> party) { return !user.hasOpus(); }
         @Override protected String apply(Hero user, Enemy chosen, Hero ally, List<Enemy> enemies, List<Hero> party) {
             int a = atk > 0 ? atk : user.getMatk();                 // 0 = ATK + user's M.ATK
-            user.giveOpus(targets, a);
-            return head(user) + "for the rest of this battle " + user.getName() + "'s Attack hits " + targets + " enemies with ATK +" + a + ".";
+            user.giveOpus(targets, a, turns);
+            return head(user) + "for " + turns + " turns " + user.getName() + "'s Attack hits " + targets + " enemies with ATK +" + a + ".";
         }
     }
 

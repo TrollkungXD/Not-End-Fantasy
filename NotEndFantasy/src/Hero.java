@@ -17,7 +17,7 @@ public class Hero extends Entity {
     private int empower, empowerHits;         // Bloody Opus: +ATK for the next N attacks
     private int cloneDmg, cloneT;             // Phantom in the Mirror
     private Hero guardian; private int guardT; // Last Line of Defense: attacks go to the guardian
-    private int opusTargets = 1, opusAtk;     // Bloody Opus (rest of the battle): basic attack hits N enemies, +ATK
+    private int opusTargets = 1, opusAtk, opusT; // Bloody Opus (some turns): basic attack hits N enemies, +ATK
     private int demonAtk, demonT;             // Yato - Demon Mode: ATK + (her M.ATK)
     private int rageAtk, rageT;               // Yato - Blade Dance: RAGE, ATK only (not M.ATK)
 
@@ -47,8 +47,8 @@ public class Hero extends Entity {
     public void giveDemon(int amount, int turns) { demonAtk = Math.max(demonAtk, amount); demonT = Math.max(demonT, turns); }
     /** RAGE: ATK +amount for some turns (no stacking). */
     public void giveRage(int amount, int turns) { rageAtk = Math.max(rageAtk, amount); rageT = Math.max(rageT, turns); }
-    /** Bloody Opus: for the rest of the battle the basic attack hits `targets` enemies and ATK +atk. */
-    public void giveOpus(int targets, int atk) { opusTargets = Math.max(opusTargets, targets); opusAtk = Math.max(opusAtk, atk); }
+    /** Bloody Opus: for `turns` turns the basic attack hits `targets` enemies and ATK +atk. */
+    public void giveOpus(int targets, int atk, int turns) { opusTargets = Math.max(opusTargets, targets); opusAtk = Math.max(opusAtk, atk); opusT = Math.max(opusT, turns); }
     public boolean hasOpus() { return opusTargets > 1 || opusAtk > 0; }
     /** How many enemies the plain Attack hits. */
     public int basicTargets() { return opusTargets; }
@@ -71,6 +71,7 @@ public class Hero extends Entity {
         if (safeT > 0 && --safeT == 0) safeHeal = 0;
         if (samsaraT > 0 && --samsaraT == 0) samsara = null;
         if (cloneT > 0) cloneT--;
+        if (opusT > 0 && --opusT == 0) { opusTargets = 1; opusAtk = 0; }
         if (guardT > 0 && --guardT == 0) guardian = null;
         if (demonT > 0 && --demonT == 0) demonAtk = 0;
         if (rageT > 0 && --rageT == 0) rageAtk = 0;
@@ -79,13 +80,13 @@ public class Hero extends Entity {
     @Override public void clearStatus() {
         super.clearStatus();
         safeHeal = safeT = samsaraT = 0; samsara = null;
-        empower = empowerHits = cloneDmg = cloneT = guardT = opusAtk = 0; guardian = null; opusTargets = 1;
+        empower = empowerHits = cloneDmg = cloneT = guardT = opusAtk = opusT = 0; guardian = null; opusTargets = 1;
         demonAtk = demonT = rageAtk = rageT = 0;
     }
     @Override public List<String[]> statusInfo() {
         List<String[]> l = super.statusInfo();
         if (empowerHits > 0) l.add(new String[]{"OPUS +" + empower + " x" + empowerHits, "Bloody Opus: ATK +" + empower + " for the next " + empowerHits + " attacks."});
-        if (hasOpus()) l.add(new String[]{"OPUS", "Bloody Opus (this battle): Attack hits " + opusTargets + " random enemies, ATK +" + opusAtk + "."});
+        if (hasOpus()) l.add(new String[]{"OPUS", "Bloody Opus: Attack hits " + opusTargets + " random enemies, ATK +" + opusAtk + " (" + opusT + (opusT == 1 ? " turn)." : " turns).")});
         if (demonT > 0) l.add(new String[]{"DEMON +" + demonAtk, "Demon Mode: ATK +" + demonAtk + " (" + demonT + (demonT == 1 ? " turn)." : " turns).")});
         if (rageT > 0) l.add(new String[]{"RAGE +" + rageAtk, "Rage: ATK +" + rageAtk + " (" + rageT + (rageT == 1 ? " turn)." : " turns).")});
         if (cloneT > 0) l.add(new String[]{"CLONE", "Shadow clone: every attack deals +" + cloneDmg + " damage (" + cloneT + " turns)."});
@@ -176,7 +177,7 @@ public class Hero extends Entity {
             .with(new Skill.Hex("Star of Valley", "One enemy takes x2 M.ATK, 60% BLIND for 2 turns.", 3, Skill.Target.ENEMY, 2, true, 1,
                     EnemyMove.Ailment.BLIND, 60, 0, 2).fp(1).fx("FLARE_WHITE"))
             .with(new Skill.SpellWard("Hymn of Respite", "Null the next magic hit on you; the caster takes x2.5 M.ATK magic dmg.", 4, 2.5).fp(1).fx("GLOW_VIOLET"))
-            .with(new Skill.Anthem("Angel's Blessings", "PARTY: heal 13 HP and ATK/M.ATK +4 for 3 turns.", 5, 13, 4, 3).fp(3).fx("GLITTER")));
+            .with(new Skill.Anthem("Angel's Blessings", "PARTY: heal 15 HP and ATK/M.ATK +4 for 3 turns.", 5, 15, 4, 3).fp(3).fx("GLITTER")));
         l.add(new Hero("Hivia", "The Guardian", "Quiet and steadfast. Hides her comrades from danger so they can fight another day.",
                 new Color(140, 170, 120), 50, 5, 3, 2, 0).basic(Stat.DEF)
             .with(new Skill.Camouflage("Emergency Camouflage", "Ally heals 10 HP and is HIDDEN for 2 turn.", 3, 10, 2).fp(1).fx("HEAL_GREEN"))
@@ -186,11 +187,11 @@ public class Hero extends Entity {
         l.add(new Hero("Phantom", "Assassin", "A performer between reality and illusion. A second shadow follows his every move.",
                 new Color(140, 110, 190), 25, 3, 2, 10, 0)
             .with(new Skill.Barrier("Phantom of the Night", "Barrier absorbs damage equal to Phantom's ATK for 3 turns, heal 10 HP.", 3, 0, 3, 10).fp(1).fx("ORB_PURPLE"))
-            .with(new Skill.Opus("Bloody Opus", "Rest of battle: Attack hits 3 random enemies, ATK + Phantom's M.ATK.", 4, 3, 0).fp(2).fx("BLOOD_BURST"))
+            .with(new Skill.Opus("Bloody Opus", "3 turns: Attack hits 3 random enemies, ATK + Phantom's M.ATK.", 4, 3, 0, 3).fp(2).fx("BLOOD_BURST"))
             .with(new Skill.Hex("Night Raid", "ALL enemies take x1.3 ATK, 50% STUN each.", 3, Skill.Target.ALL_ENEMIES, 1.3, false, 1,
                     EnemyMove.Ailment.STUN, 50, 0, 1).fp(2).fx("SLASH_PURPLE"))
-            .with(new Skill.MirrorNight("Phantom in the Mirror", "Shadow clone (4 turns): every attack deals +ATK/3 damage. Cleanse the party, party ATK +2 for 4 turns, 50% BLIND on every enemy (2 turns).",
-                    5, 4, 2, 4, 50, 2).fp(3).fx("DARK_ORB")));
+            .with(new Skill.MirrorNight("Phantom in the Mirror", "Cleanse the party, party ATK +3 for 4 turns, 50% BLIND on every enemy (2 turns).",
+                    5, 3, 4, 50, 2).fp(3).fx("DARK_ORB")));
         return l;
     }
 
@@ -229,7 +230,7 @@ public class Hero extends Entity {
     /** Secret hero: joins as the 3rd party member after clearing the secret stage (Primal Forest). */
     public static Hero orchid() {
         return new Hero("Orchid", "Ranger", "A girl with a mysterious aura. Beautiful, dangerous, and deadly with a bow.",
-                new Color(190, 120, 220), 40, 4, 2, 6, 6)
+                new Color(190, 120, 220), 45, 6, 2, 7, 7)
             .with(new Skill.Volley("Arrow Rain", "Hit 2 random enemies (x1.8 ATK) and WEAK -3 for 3 turns.", 2, 2, 1.8, 3, 3).fp(2).fx("FIRE_STREAKS"))
             .with(new Skill.Moonfall("A Flying in the Moon", "One enemy: x2 ATK + x2 M.ATK. Orchid is WEAK -5 next turn.", 3, 2, 2, 5).fp(2).fx("BURST_VIOLET"))
             .with(new Skill.Aggressive("Tale of Lonely Mystery", "PARTY: AGGRESSIVE (ATK +2, DEF -2) for 3 turns.", 4, 2, 3).fp(2).fx("SPARKLES"))
@@ -240,12 +241,12 @@ public class Hero extends Entity {
      *  Taking her locks Orchid for the rest of the run. */
     public static Hero yato() {
         return new Hero("Yato", "Kirin Hunter", "A woman with confident, sharp eyes and a keen wit. Her combat prowess is real - she fights as quick as lightning.",
-                new Color(110, 190, 230), 30, 4, 4, 8, 2)
+                new Color(110, 190, 230), 35, 4, 6, 10, 4)
             .with(new Skill.Hex("Kirin Bolts", "One enemy takes x2 ATK, 90% STUN.", 4, Skill.Target.ENEMY, 2.0, false, 1,
                     EnemyMove.Ailment.STUN, 90, 0, 1).fp(1).fx("BOLT_FORK"))
-            .with(new Skill.DemonMode("Demon Mode", "Rage mode: Yato ATK + her M.ATK for 4 turns.", 5, 4).fp(2).fx("RING_BLOOD"))
-            .with(new Skill.BladeDance("Blade Dance", "PARTY: RAGE, ATK +3 for 3 turns. Yato is SILENCED for 2 turns.", 4, 3, 3, 2).fp(1).fx("WIND_SWIRL"))
-            .with(new Skill.SpinningBlade("Midair Spinning Blade Dance", "Target + 2 more enemies take x1.8 ATK and BLEED 5 for 3 turns.", 4, 3, 1.8, 5, 3).fp(3).fx("SLASH_PURPLE"));
+            .with(new Skill.DemonMode("Demon Mode", "Rage mode: Yato ATK + her M.ATK for 4 turns.", 5, 4).fp(1).fx("RING_BLOOD"))
+            .with(new Skill.BladeDance("Blade Dance", "PARTY: RAGE, ATK +3 for 4 turns. Yato is SILENCED for 2 turns.", 4, 3, 4, 2).fp(1).fx("WIND_SWIRL"))
+            .with(new Skill.SpinningBlade("Midair Spinning Blade Dance", "Target + 2 more enemies take x2 ATK and BLEED 5 for 3 turns.", 4, 3, 2, 5, 3).fp(3).fx("SLASH_PURPLE"));
     }
 
     public static List<Hero> roster() { List<Hero> l = starters(); l.addAll(companions()); l.add(orchid()); l.add(yato()); return l; }

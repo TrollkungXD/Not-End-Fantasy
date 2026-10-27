@@ -497,47 +497,47 @@ public class Stage {
     private static Stage warfield() {
         Stage s = new Stage(5, 20, "Memories Of Warfield", "Echoes of a war that never ended. The last king waits.",
                 new Color(60, 40, 30), new Color(255, 200, 90));
-        s.monsters.add(() -> phys("Goldporing", 70, 0, 10, 16, 60, new Color(250, 210, 60))
+        s.monsters.add(() -> phys("Goldporing", 70, 0, 15, 16, 60, new Color(250, 210, 60))
                 .with(new EnemyMove.Mend("Shiny Bounce", 2, 2)));
         s.monsters.add(() -> phys("Alarm", 60, 8, 8, 14, 32, new Color(200, 180, 120))
                 .with(new EnemyMove.Afflict("Time Stop", 0, false, EnemyMove.Ailment.STUN, 0, 1, 80, false, 1), new EnemyMove.Strike("Clock Hands", 1, false, 3, 2), new EnemyMove.Rally("Time's Up", 2, 2, 1)));
-        s.monsters.add(() -> phys("Harpy", 46, 4, 3, 12, 35, new Color(180, 140, 110))
+        s.monsters.add(() -> phys("Harpy", 54, 8, 3, 12, 35, new Color(180, 140, 110))
                 .with(new EnemyMove.Afflict("Gale Feathers", 1.2, false, EnemyMove.Ailment.BLIND, 0, 2, 70, true, 1), new EnemyMove.Strike("Talon Dive", 0.6, false, 2, 2), new EnemyMove.Sweep("Feather Storm", 0.6, false, 1)));
-        s.monsters.add(() -> phys("Raydric", 35, 6, 3, 10, 22, new Color(90, 90, 110))
+        s.monsters.add(() -> phys("Raydric", 62, 6, 10, 10, 22, new Color(90, 90, 110))
                 .with(new EnemyMove.Afflict("Armor Splitter", 1.5, false, EnemyMove.Ailment.BREAK, 3, 2, 80, false, 1), new EnemyMove.Guard("Iron Wall", 4, 2, true, 1), new EnemyMove.Strike("Heavy Slash", 1.4, false, 1, 2)));
-        s.monsters.add(() -> mage("Retribution", 67, 1, 12, 14, 56, new Color(250, 200, 120))
+        s.monsters.add(() -> mage("Retribution", 67, 4, 14, 14, 56, new Color(250, 200, 120))
                 .with(new EnemyMove.Afflict("Holy Fire", 1.5, true, EnemyMove.Ailment.BURN, 5, 3, 80, true, 1), new EnemyMove.Sweep("Judgement Fire", 0.9, true, 2), new EnemyMove.Strike("Holy Strike", 1.3, true, 1, 1)));
-        s.monsters.add(() -> mage("Shelter", 57, 3, 5, 12, 25, new Color(150, 200, 230))
+        s.monsters.add(() -> mage("Shelter", 57, 14, 4, 12, 25, new Color(150, 200, 230))
                 .with(new EnemyMove.Restore("Holy Sanctuary", 0.15, 3, 1),
                       new EnemyMove.Afflict("Seal", 0, true, EnemyMove.Ailment.SILENCE, 0, 2, 77, false, 1), new EnemyMove.Mend("Sanctuary", 2, 2), new EnemyMove.Guard("Barrier", 3, 2, true, 1)));
-        s.monsters.add(() -> mage("Piamette", 48, 3, 5, 14, 22, new Color(230, 150, 200))
+        s.monsters.add(() -> mage("Piamette", 48, 7, 9, 14, 22, new Color(230, 150, 200))
                 .with(new EnemyMove.Afflict("Doll's Curse", 0.8, true, EnemyMove.Ailment.CURSE, 0, 5, 80, true, 1), new EnemyMove.Weaken("Puppet Strings", 3, 2, 1), new EnemyMove.Drain("Doll's Embrace", 1.0, true, 2)));
-        s.monsters.add(() -> mage("Incubus", 55, 3, 5, 10, 22, new Color(150, 60, 120))
+        s.monsters.add(() -> mage("Incubus", 55, 8, 12, 10, 22, new Color(150, 60, 120))
                 .with(new EnemyMove.Afflict("Nightmare Kiss", 0.9, true, EnemyMove.Ailment.STUN, 0, 1, 35, false, 1), new EnemyMove.Drain("Kiss of Ruin", 1.0, true, 2), new EnemyMove.Weaken("Charm", 3, 2, 1)));
-        s.monsters.add(() -> mage("Wicked Nymph", 34, 2, 8, 15, 42, new Color(120, 200, 160))
+        s.monsters.add(() -> mage("Wicked Nymph", 40, 4, 12, 15, 30, new Color(120, 200, 160))
                 .with(new EnemyMove.Afflict("Lullaby", 0.5, true, EnemyMove.Ailment.STUN, 0, 1, 60, true, 1), new EnemyMove.Sweep("Wicked Song", 0.7, true, 2), new EnemyMove.Venom("Toxic Petal", 0.7, true, 3, 3, 1)));
-        s.monsters.add(() -> mage("Evil Cloud Hermit", 49, 10, 5, 12, 34, new Color(140, 140, 170))
+        s.monsters.add(() -> mage("Evil Cloud Hermit", 69, 10, 5, 12, 34, new Color(140, 140, 170))
                 .with(new EnemyMove.Afflict("Thunderstorm", 1.5, true, EnemyMove.Ailment.BLIND, 0, 2, 80, true, 1), new EnemyMove.Charge("Thunder Cloud", 1.8, true, 1), new EnemyMove.Sweep("Acid Rain", 0.8, true, 2)));
         s.monsters.add(() -> phys("Minorous", 80, 12, 0, 18, 38, new Color(170, 90, 60))
                 .with(new EnemyMove.Afflict("Earthquake", 1, false, EnemyMove.Ailment.STUN, 0, 1, 30, true, 1), new EnemyMove.Charge("Hammer Slam", 2.5, false, 1), new EnemyMove.Rally("Bull Roar", 3, 3, 1)));
-        s.monsters.add(() -> phys("Valkyrie", 61, 7, 7, 14, 44, new Color(230, 230, 250))
-                .with(new EnemyMove.Afflict("Spear of Odin", 1.6, false, EnemyMove.Ailment.BREAK, 3, 4, 80, false, 1), new EnemyMove.Strike("Spear Thrust", 1.4, false, 1, 2), new EnemyMove.Guard("Valhalla", 5, 5, true, 1),
+        s.monsters.add(() -> phys("Valkyrie", 100, 14, 14, 14, 44, new Color(230, 230, 250))
+                .with(new EnemyMove.Afflict("Spear of Odin", 1.5, false, EnemyMove.Ailment.BREAK, 3, 4, 80, false, 1), new EnemyMove.Strike("Spear Thrust", 1.4, false, 1, 2), new EnemyMove.Guard("Valhalla", 5, 5, true, 1),
                       new EnemyMove.Mend("Einherjar", 0.5, 1)));
-        s.setBoss("Arch Regalia", () -> new Enemy.Boss("Arch Regalia", 360, 10, 10, 10, 20, 350, new Color(240, 200, 80))
+        s.setBoss("Arch Regalia", () -> new Enemy.Boss("Arch Regalia", 400, 14, 14, 10, 20, 350, new Color(240, 200, 80))
                 .with(new EnemyMove.Restore("Royal Grace", 0.15, 0.10, 4, 1),
-                      new EnemyMove.Summon("Summon Reginleif", () -> phys("Reginleif", 35, 4, 3, 16, 10, new Color(230, 230, 250))
-                          .with(new EnemyMove.Strike("Valkyrie Lance", 1.2, false, 1, 2), new EnemyMove.Guard("Shield Maiden", 4, 3, true, 1)), 3, 1),
-                      new EnemyMove.Afflict("Regal Decree", 1.2, true, EnemyMove.Ailment.CURSE, 0, 3, 80, true, 2),
-                      new EnemyMove.Charge("Crown Breaker", 2.4, false, 1),
-                      new EnemyMove.Afflict("Royal Silence", 1.5, true, EnemyMove.Ailment.SILENCE, 0, 2, 60, true, 1),
-                      new EnemyMove.FpDrain("Royal Tax", 2, 1.5, true, 1),new EnemyMove.Mend("World Blessing", 0.2, 1),
+                      new EnemyMove.Summon("Summon Reginleif", () -> phys("Reginleif", 45, 8, 8, 14, 10, new Color(230, 230, 250))
+                          .with(new EnemyMove.Strike("Valkyrie Lance", 1.4, false, 1, 2), new EnemyMove.Guard("Shield Maiden", 5, 4, true, 1)), 3, 1),
+                      new EnemyMove.Afflict("Regal Decree", 1.5, true, EnemyMove.Ailment.CURSE, 0, 3, 80, true, 2),
+                      new EnemyMove.Charge("Crown Breaker", 2.5, false, 1),
+                      new EnemyMove.Afflict("Royal Silence", 1.5, true, EnemyMove.Ailment.SILENCE, 0, 3, 80, true, 1),
+                      new EnemyMove.FpDrain("Royal Tax", 2, 1.5, true, 1),new EnemyMove.Mend("World Blessing", 0.3, 1),
                       new EnemyMove.Afflict("Kneel!", 1.2, false, EnemyMove.Ailment.STUN, 0, 1, 45, false, 1),
-                      new EnemyMove.Afflict("Oppress", 1.2, true, EnemyMove.Ailment.WEAK, 3, 4, 80, true, 1),
+                      new EnemyMove.Afflict("Oppress", 1.2, true, EnemyMove.Ailment.WEAK, 6, 4, 80, true, 1),
                       new EnemyMove.Drain("Tribute", 1.5, false, 1)));
         s.layout(new String[]{"X", "M", "M E", "E M M", "M", "S E", "M M", "E M E", "R", "M", "M E M", "S", "M M", "E M", "M E M", "R", "M M", "S E", "R", "B"}, 55, 28, pool(5,
-            new Event.Trap("Collapsing Bridge", "The stone bridge across the battlefield is cracked.", 10),
-            new Event.Trap("Old Minefield", "Rusty mines poke out of the mud.", 9),
-            new Event.Chest("Royal Treasury", "Gold spills out of a broken war chest.", 70),
+            new Event.Trap("Collapsing Bridge", "The stone bridge across the battlefield is cracked.", 30),
+            new Event.Trap("Old Minefield", "Rusty mines poke out of the mud.", 25),
+            new Event.Chest("Royal Treasury", "Gold spills out of a broken war chest.", 67),
             new Event.Shrine("Fallen Queen's Garden", "Blue roses still bloom between the trenches.", 0.25),
             new Event.Ambush("Royal Guard", "\"Intruders on the king's field!\""),
             new Event.Choice("The Regal Envoy", "A masked envoy bows. \"His Majesty offers gold if you turn back. Or... you could pay tribute and pass in peace.\"",
@@ -555,31 +555,31 @@ public class Stage {
                 new Color(24, 56, 30), new Color(150, 230, 120));
         s.monsters.add(() -> phys("Spring Rabbit", 30, 2, 2, 20, 50, new Color(240, 220, 200))
                 .with(new EnemyMove.Strike("Hop Kick", 0.6, false, 2, 2), new EnemyMove.Afflict("Dizzy Hop", 0.6, false, EnemyMove.Ailment.STUN, 0, 1, 25, false, 1)));
-        s.monsters.add(() -> mage("Red Pitaya", 35, 2, 4, 18, 50, new Color(230, 70, 110))
-                .with(new EnemyMove.Afflict("Thorn Spray", 0.6, true, EnemyMove.Ailment.POISON, 3, 3, 70, true, 2), new EnemyMove.Mend("Juicy Regrowth", 0.25, 1)));
-        s.monsters.add(() -> phys("Permeter", 40, 6, 2, 12, 25, new Color(150, 140, 100))
+        s.monsters.add(() -> mage("Red Pitaya", 35, 6, 4, 18, 50, new Color(230, 70, 110))
+                .with(new EnemyMove.Afflict("Thorn Spray", 0.8, true, EnemyMove.Ailment.POISON, 5, 3, 70, true, 2), new EnemyMove.Mend("Juicy Regrowth", 0.25, 1)));
+        s.monsters.add(() -> phys("Permeter", 40, 6, 8, 12, 25, new Color(150, 140, 100))
                 .with(new EnemyMove.Guard("Shell Up", 3, 2, true, 1), new EnemyMove.Strike("Rolling Charge", 1.3, false, 1, 2)));
-        s.monsters.add(() -> phys("Solider", 40, 5, 2, 12, 27, new Color(110, 150, 90))
+        s.monsters.add(() -> phys("Solider", 40, 7, 7, 12, 27, new Color(110, 150, 90))
                 .with(new EnemyMove.Strike("Spear Thrust", 1.4, false, 1, 2), new EnemyMove.Afflict("Shell Bash", 0.8, false, EnemyMove.Ailment.STUN, 0, 1, 30, false, 1)));
-        s.monsters.add(() -> mage("Owl Duke", 26, 2, 5, 13, 24, new Color(160, 130, 90))
+        s.monsters.add(() -> mage("Owl Duke", 40, 2, 8, 13, 24, new Color(160, 130, 90))
                 .with(new EnemyMove.Restore("Moonlit Chorus", 0.15, 3, 1),
-                      new EnemyMove.Afflict("Hypnotic Gaze", 0, true, EnemyMove.Ailment.SILENCE, 0, 2, 50, false, 1), new EnemyMove.Sweep("Thunder Feathers", 0.7, true, 2)));
-        s.monsters.add(() -> phys("Gryphon", 37, 3, 3, 13, 26, new Color(200, 170, 110))
+                      new EnemyMove.Afflict("Hypnotic Gaze", 0, true, EnemyMove.Ailment.SILENCE, 0, 3, 50, false, 1), new EnemyMove.Sweep("Thunder Feathers", 0.7, true, 2)));
+        s.monsters.add(() -> phys("Gryphon", 37, 8, 3, 13, 26, new Color(200, 170, 110))
                 .with(new EnemyMove.Strike("Dive Talon", 1, false, 2, 2), new EnemyMove.Afflict("Gale Wings", 0.6, false, EnemyMove.Ailment.BLIND, 0, 2, 60, true, 1),
                       new EnemyMove.Charge("Sky Dive", 2, false, 6)));
-        s.monsters.add(() -> phys("Venom Chimera", 50, 4, 3, 13, 36, new Color(120, 160, 80))
+        s.monsters.add(() -> phys("Venom Chimera", 80, 0, 6, 13, 36, new Color(120, 160, 80))
                 .with(new EnemyMove.Venom("Venom Fang", 1.2, false, 4, 4, 2), new EnemyMove.Afflict("Toxic Breath", 0.6, true, EnemyMove.Ailment.POISON, 3, 6, 100, true, 1)));
-        s.monsters.add(() -> mage("Miguel", 30, 2, 6, 17, 32, new Color(120, 120, 200))
+        s.monsters.add(() -> mage("Miguel", 67, 0, 0, 18, 32, new Color(120, 120, 200))
                 .with(new EnemyMove.Afflict("Mystic Seal", 1, true, EnemyMove.Ailment.CURSE, 0, 3, 89, false, 1), new EnemyMove.Drain("Soul Siphon", 1.5, true, 2)));
-        s.monsters.add(() -> phys("Turtle General", 40, 5, 5, 19, 70, new Color(90, 130, 90))
-                .with(new EnemyMove.Rally("War Drums", 5, 2, 2), new EnemyMove.Afflict("Shell Quake", 0.9, false, EnemyMove.Ailment.BREAK, 3, 2, 70, true, 1),
-                      new EnemyMove.Guard("Iron Shell", 5, 2, true, 1)));
-        s.setBoss("Lord Of Mysterious", () -> new Enemy.Boss("Lord Of Mysterious", 250, 5, 4, 16, 14, 270, new Color(90, 120, 60))
+        s.monsters.add(() -> phys("Turtle General", 88, 14, 4, 19, 70, new Color(90, 130, 90))
+                .with(new EnemyMove.Rally("War Drums", 5, 3, 2), new EnemyMove.Afflict("Shell Quake", 0.9, false, EnemyMove.Ailment.BREAK, 3, 3, 70, true, 1),
+                      new EnemyMove.Guard("Iron Shell", 5, 3, true, 1)));
+        s.setBoss("Lord Of Mysterious", () -> new Enemy.Boss("Lord Of Mysterious", 280, 6, 6, 16, 14, 270, new Color(90, 120, 60))
                 .with(new EnemyMove.Restore("Mysterious Renewal", 0.15, 0.10, 4, 1),
-                      new EnemyMove.Summon("Bear Fruit", () -> mage("Red Pitaya", 30, 3, 3, 14, 6, new Color(230, 70, 110))
+                      new EnemyMove.Summon("Bear Fruit", () -> mage("Red Pitaya", 40, 5, 5, 12, 6, new Color(230, 70, 110))
                           .with(new EnemyMove.Afflict("Thorn Spray", 0.9, true, EnemyMove.Ailment.POISON, 3, 3, 70, true, 2)), 3, 1),
                       new EnemyMove.Afflict("Venom Prison", 1, false, EnemyMove.Ailment.STUN, 0, 1, 60, false, 1),
-                      new EnemyMove.Afflict("Viper Storm", 1, true, EnemyMove.Ailment.POISON, 8, 3, 100, true, 2),
+                      new EnemyMove.Afflict("Viper Storm", 1, true, EnemyMove.Ailment.POISON, 8, 4, 100, true, 2),
                       new EnemyMove.Sweep("Split Barrage", 1, false, 1), new EnemyMove.Mend("Healing Acidic", 0.3, 1),
                       new EnemyMove.Charge("Insane Drive", 2, false, 1), new EnemyMove.FpDrain("No more soul", 1, 1, true, 1)));
         s.layout(new String[]{"X", "M", "M E", "M M", "E M", "S M", "M E M", "R", "M M", "E M", "M M", "S", "M E", "R M", "E", "B"}, 66, 24, pool(4,
