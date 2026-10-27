@@ -1,5 +1,15 @@
-# Compiled class file
+# Java build output
+out/
 *.class
+package-input/
+release/
+
+# IDE and operating system files
+.idea/
+*.iml
+.vscode/
+Thumbs.db
+.DS_Store
 
 # Log file
 *.log
@@ -12,6 +22,7 @@
 
 # Package Files #
 *.jar
+!lib/*.jar
 *.war
 *.nar
 *.ear
