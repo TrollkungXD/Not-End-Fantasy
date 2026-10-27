@@ -1,7 +1,7 @@
 import javax.swing.*;
 import java.awt.*;
 
-/** Slim bar at the very top of the window: music volume [-] [+] and a mute button. Never covers the game screens. */
+/** Slim bar at the very top of the window: window size button, music volume [-] [+] and a mute button. Never covers the game screens. */
 public class SoundBar extends JMenuBar {
     public static final int HEIGHT = 26;
     private final JLabel level = new JLabel();
@@ -19,6 +19,12 @@ public class SoundBar extends JMenuBar {
         level.setPreferredSize(new Dimension(42, 20));
         mute = small("Mute", "Turn the music off / on", e -> Music.toggleMute());
         mute.setPreferredSize(new Dimension(58, 20));
+        JButton size = small("Size " + WindowSize.current() + "%", "Make the game window bigger / smaller (100% / 125% / 150%)", null);
+        size.addActionListener(e -> WindowSize.next(size));
+        size.setPreferredSize(new Dimension(84, 20));
+        add(size);
+        JLabel gap = new JLabel(); gap.setPreferredSize(new Dimension(10, 20));
+        add(gap);
         add(title);
         add(small("-", "Volume down", e -> Music.softer()));
         add(level);
