@@ -11,6 +11,7 @@ public abstract class Entity {
     private int defUp, defUpT, mdefUp, mdefUpT;     // +DEF / +M.DEF
     private int boost, boostT;                      // +ATK/M.ATK
     private int aggro, aggroT;                      // AGGRESSIVE: +ATK but -DEF
+    private int atkUp, atkUpT;                      // +ATK only
     private int regen, regenT;                      // gain HP each round
     private int reduce, reduceT;                    // every hit taken is reduced by this much
     private int shield, shieldT;                    // barrier that absorbs damage
@@ -42,7 +43,7 @@ public abstract class Entity {
     public int getMaxHp() { return maxHp; }
     public int getDef() { return Math.max(0, def + defUp - brk - aggro - (freezeT > 0 ? 3 : 0)); }
     public int getMdef() { return mdefBreakT > 0 ? 0 : Math.max(0, mdef + mdefUp - brk); }
-    public int getAtk() { return Math.max(0, atk + boost + aggro - weak - (bleedT > 0 ? bleed : 0)); }
+    public int getAtk() { return Math.max(0, atk + boost + aggro + atkUp - weak - (bleedT > 0 ? bleed : 0)); }
     public int getMatk() { return matkZeroT > 0 ? 0 : Math.max(0, matk + boost - weak - (bleedT > 0 ? bleed : 0)); }
     public int getBaseDef() { return def; }
     public int getBaseMdef() { return mdef; }
@@ -105,6 +106,7 @@ public abstract class Entity {
     public void giveDefUp(int a, int t) { defUp = Math.max(defUp, a); defUpT = Math.max(defUpT, t); }
     public void giveMdefUp(int a, int t) { mdefUp = Math.max(mdefUp, a); mdefUpT = Math.max(mdefUpT, t); }
     public void giveBoost(int a, int t) { boost = Math.max(boost, a); boostT = Math.max(boostT, t); }   // never stacks
+    public void giveAtkUp(int a, int t) { atkUp = Math.max(atkUp, a); atkUpT = Math.max(atkUpT, t); }   // never stacks
     public void giveAggressive(int a, int t) { aggro = Math.max(aggro, a); aggroT = Math.max(aggroT, t); }
     public void giveWeak(int a, int t) { weak = Math.max(weak, a); weakT = Math.max(weakT, t); }
     public void giveBreak(int a, int t) { brk = Math.max(brk, a); brkT = Math.max(brkT, t); }
@@ -150,7 +152,7 @@ public abstract class Entity {
         silenceT = blindT = curseT = stun = freezeT = matkZeroT = 0;
     }
     public void clearStatus() {
-        aggro = aggroT = 0;
+        aggro = aggroT = atkUp = atkUpT = 0;
         defUp = defUpT = mdefUp = mdefUpT = boost = boostT = regen = regenT = reduce = reduceT = 0;
         shield = shieldT = thorns = thornsT = matkZeroT = concealT = evadePct = evadeT = steadyT = 0;
         dodgeT = spellWard = 0;
@@ -184,6 +186,7 @@ public abstract class Entity {
         if (mdefUpT > 0 && --mdefUpT == 0) mdefUp = 0;
         if (boostT > 0 && --boostT == 0) boost = 0;
         if (aggroT > 0 && --aggroT == 0) aggro = 0;
+        if (atkUpT > 0 && --atkUpT == 0) atkUp = 0;
         if (weakT > 0 && --weakT == 0) weak = 0;
         if (brkT > 0 && --brkT == 0) brk = 0;
         if (reduceT > 0 && --reduceT == 0) reduce = 0;
@@ -215,6 +218,7 @@ public abstract class Entity {
             if (mdefUp > 0) l.add(new String[]{"M.DEF +" + mdefUp, "M.DEF +" + mdefUp + t(mdefUpT)});
         }
         if (boost > 0) l.add(new String[]{"POWER +" + boost, "ATK and M.ATK +" + boost + t(boostT)});
+        if (atkUp > 0) l.add(new String[]{"ATK +" + atkUp, "ATK +" + atkUp + t(atkUpT)});
         if (aggro > 0) l.add(new String[]{"AGGRESSIVE +" + aggro, "Aggressive: ATK +" + aggro + " but DEF -" + aggro + t(aggroT)});
         if (reduceT > 0) l.add(new String[]{"DMG -" + reduce, "Every hit taken is reduced by " + reduce + t(reduceT)});
         if (shieldT > 0 && shield > 0) l.add(new String[]{"SHIELD " + shield, "Barrier absorbs the next " + shield + " damage" + t(shieldT)});

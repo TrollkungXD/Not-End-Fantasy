@@ -438,6 +438,28 @@ public abstract class Skill {
         }
     }
 
+    /** Phantom - Phantom in the Mirror: shadow clone, cleanse + ATK up for the party, chance to BLIND every enemy. */
+    public static class MirrorNight extends Skill {
+        private final int cloneTurns, atkUp, atkTurns, blindChance, blindTurns;
+        public MirrorNight(String name, String desc, int cd, int cloneTurns, int atkUp, int atkTurns, int blindChance, int blindTurns) {
+            super(name, desc, cd, Target.PARTY);
+            this.cloneTurns = cloneTurns; this.atkUp = atkUp; this.atkTurns = atkTurns; this.blindChance = blindChance; this.blindTurns = blindTurns;
+        }
+        @Override protected String apply(Hero user, Enemy chosen, Hero ally, List<Enemy> enemies, List<Hero> party) {
+            List<Hero> hs = affected(user, ally, party);
+            for (Hero h : hs) h.cleanse();
+            int d = user.getAtk() / 3;                            // clone damage: ATK after cleansing, before the ATK up
+            user.giveClone(d, cloneTurns);
+            for (Hero h : hs) h.giveAtkUp(atkUp, atkTurns);
+            List<String> blinded = new ArrayList<>();
+            for (Enemy e : living(enemies))
+                if (RNG.nextInt(100) < blindChance) { e.giveBlind(blindTurns); blinded.add(e.getName()); }
+            return head(user) + "a shadow clone appears for " + cloneTurns + " turns (+" + d + " damage per attack). "
+                    + "Party cleansed, ATK +" + atkUp + " for " + atkTurns + " turns. "
+                    + (blinded.isEmpty() ? "No enemy was blinded." : "BLIND: " + String.join(", ", blinded) + ".");
+        }
+    }
+
     /** Ingrid - Accelerando. */
     public static class Dodge extends Skill {
         public Dodge(String name, String desc, int cd) { super(name, desc, cd, Target.SELF); }

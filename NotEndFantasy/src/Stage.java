@@ -270,10 +270,10 @@ public class Stage {
                       new EnemyMove.Guard("Storm Shield", 2, 4, false, 2)));
         s.layout(new String[]{"X", "M", "M E", "E M", "M", "R E", "M E", "S", "E M M", "E M", "R E M", "E E", "M S M", "B"}, 22, 18, pool(2,
             new Event.Trap("Falling Icicles", "Huge icicles hang from the ceiling above the hall.", 10),
-            new Event.Trap("Frozen Floor", "The floor ahead is slick black ice.", 10),
-            new Event.Chest("Frozen Treasure", "A chest is sealed inside a block of ice.", 15),
+            new Event.Trap("Frozen Floor", "The floor ahead is slick black ice.", 15),
+            new Event.Chest("Frozen Treasure", "A chest is sealed inside a block of ice.", 35),
             new Event.Shrine("Warm Hearth", "A fireplace still burns in an empty room.", 0.25),
-            new Event.Thief("Ice Imp", "A tiny imp snatches your purse and slides away!", 25),
+            new Event.Thief("Ice Imp", "A tiny imp snatches your purse and slides away!", 20),
             new Event.Ambush("Castle Guard", "Frozen suits of armor creak to life!"),
             new Event.Choice("Singing Crystal", "A huge ice crystal hums a beautiful, haunting melody. It looks very valuable.",
                 new Event.Option("Strike it", "It looks valuable. And fragile.", (st, r) -> {
@@ -405,8 +405,8 @@ public class Stage {
                       new EnemyMove.Afflict("Dread Aura", 1.2, true, EnemyMove.Ailment.WEAK, 3, 3, 50, true, 1),
                       new EnemyMove.Drain("Soul Rend", 1.2, false, 1), new EnemyMove.FpDrain("Abyssal Hunger", 2, 0.8, false, 1)));
         s.layout(new String[]{"X", "M", "M E", "M M E", "E M", "S R", "M M", "M E M", "R", "M M", "E M E", "M E", "S M", "M E", "R", "M M", "E E", "E E","B"}, 44, 28, pool(4,
-            new Event.Trap("Cursed Spikes", "The floor tiles ahead are stained red. Something is hidden here.", 30),
-            new Event.Trap("Haunting Chill", "A ghostly cold mist fills the road.", 40),
+            new Event.Trap("Cursed Spikes", "The floor tiles ahead are stained red. Something is hidden here.", 25),
+            new Event.Trap("Haunting Chill", "A ghostly cold mist fills the road.", 35),
             new Event.Chest("Grave Goods", "A noble's coffin, still sealed.", 55),
             new Event.Shrine("Moonlit Chapel", "A faint prayer echoes in an empty chapel.", 0.25),
             new Event.Thief("Poltergeist", "Unseen hands pull coins from your bag!", 30),
@@ -442,22 +442,22 @@ public class Stage {
 
     /** Yato, the Wandering Blade - optional super boss in the Night Realm.  */
     private static Enemy yato() {
-        return new Enemy.Boss("Yato", 280, 6, 6, 17, 10, 250, new Color(150, 120, 220))
+        return new Enemy.Boss("Yato", 270, 6, 6, 16, 10, 250, new Color(150, 120, 220))
             .with(new EnemyMove.Restore("Moonlit Meditation", 0.15, 0.10, 4, 1),
                       new EnemyMove.Strike("Twin Moon Slash", 0.8, false, 2, 3),
                   new EnemyMove.Strike("Iai: Crescent", 1.6, false, 1, 2),
                   new EnemyMove.Sweep("Thousand Petal Cuts", 0.8, false, 2),
-                  new EnemyMove.Charge("Moonlight Severance", 3.2, false, 1),
+                  new EnemyMove.Charge("Moonlight Severance", 3.0, false, 1),
                   new EnemyMove.Afflict("Shadow Step", 1.2, false, EnemyMove.Ailment.BREAK, 3, 2, 85, false, 1),
                   new EnemyMove.Afflict("Pressure Point", 1.0, false, EnemyMove.Ailment.STUN, 0, 1, 45, false, 1),
-                  new EnemyMove.Afflict("Bleeding Lotus", 0.9, false, EnemyMove.Ailment.POISON, 4, 3, 70, true, 1),
+                  new EnemyMove.Afflict("Bleeding Lotus", 0.8, false, EnemyMove.Ailment.POISON, 3, 3, 70, true, 1),
                   new EnemyMove.FpDrain("Feint", 2, 0.8, false, 1),
                   new EnemyMove.Guard("Parry Stance", 4, 2, false, 1),
                   new EnemyMove.Rally("Wanderer's Focus", 3, 2, 1));
     }
     /** Divine Kirin - secret boss in the Primal Forest (Yato's quest). Lightning magic, stuns and silences. */
     private static Enemy divineKirin() {
-        return new Enemy.Boss("Divine Kirin", 260, 6, 5, 14, 18, 300, new Color(110, 220, 210))
+        return new Enemy.Boss("Divine Kirin", 240, 6, 5, 14, 16, 300, new Color(110, 220, 210))
             .with(new EnemyMove.Restore("Auspicious Rain", 0.15, 0.10, 4, 1),
                       new EnemyMove.Strike("Thunder Hoof", 1.4, false, 1, 2),
                   new EnemyMove.Sweep("Heavenly Thunder", 1.0, true, 2),

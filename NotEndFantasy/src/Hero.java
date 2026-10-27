@@ -185,11 +185,12 @@ public class Hero extends Entity {
             .with(new Skill.Haven("Last Line of Defense", "Ally: DEF/M.DEF +5 and SAFEHAVEN for 2 turns (heals 5 HP every time an enemy hits them).", 4, 5, 5, 2).fp(3).fx("AURA_GOLD")));
         l.add(new Hero("Phantom", "Assassin", "A performer between reality and illusion. A second shadow follows his every move.",
                 new Color(140, 110, 190), 25, 3, 2, 10, 0)
-            .with(new Skill.Barrier("Phantom of the Night", "Barrier absorbs damage equal to Phantom's ATK for 2 turns, heal 10 HP.", 3, 0, 2, 10).fp(1).fx("ORB_PURPLE"))
+            .with(new Skill.Barrier("Phantom of the Night", "Barrier absorbs damage equal to Phantom's ATK for 3 turns, heal 10 HP.", 3, 0, 3, 10).fp(1).fx("ORB_PURPLE"))
             .with(new Skill.Opus("Bloody Opus", "Rest of battle: Attack hits 3 random enemies, ATK + Phantom's M.ATK.", 4, 3, 0).fp(2).fx("BLOOD_BURST"))
             .with(new Skill.Hex("Night Raid", "ALL enemies take x1.3 ATK, 50% STUN each.", 3, Skill.Target.ALL_ENEMIES, 1.3, false, 1,
                     EnemyMove.Ailment.STUN, 50, 0, 1).fp(2).fx("SLASH_PURPLE"))
-            .with(new Skill.Clone("Phantom in the Mirror", "Shadow clone (3 turns): every attack deals +ATK/3 damage.", 5, 0, 3).fp(3).fx("DARK_ORB")));
+            .with(new Skill.MirrorNight("Phantom in the Mirror", "Shadow clone (3 turns): every attack deals +ATK/3 damage. Cleanse the party, party ATK +2 for 4 turns, 50% BLIND on every enemy (2 turns).",
+                    6, 3, 2, 4, 50, 2).fp(3).fx("DARK_ORB")));
         return l;
     }
 
@@ -229,7 +230,7 @@ public class Hero extends Entity {
     public static Hero orchid() {
         return new Hero("Orchid", "Ranger", "A girl with a mysterious aura. Beautiful, dangerous, and deadly with a bow.",
                 new Color(190, 120, 220), 40, 4, 2, 6, 6)
-            .with(new Skill.Volley("Arrow Rain", "Hit 2 random enemies (x1.3 ATK) and WEAK -2 for 2 turns.", 2, 2, 1.3, 2, 2).fp(2).fx("FIRE_STREAKS"))
+            .with(new Skill.Volley("Arrow Rain", "Hit 2 random enemies (x1.8 ATK) and WEAK -3 for 3 turns.", 2, 2, 1.8, 3, 3).fp(2).fx("FIRE_STREAKS"))
             .with(new Skill.Moonfall("A Flying in the Moon", "One enemy: x2 ATK + x2 M.ATK. Orchid is WEAK -5 next turn.", 3, 2, 2, 5).fp(2).fx("BURST_VIOLET"))
             .with(new Skill.Aggressive("Tale of Lonely Mystery", "PARTY: AGGRESSIVE (ATK +2, DEF -2) for 3 turns.", 4, 2, 3).fp(2).fx("SPARKLES"))
             .with(new Skill.Piercer("Dragon Piercer", "ALL enemies: x1 ATK + x1 M.ATK. Orchid DEF +5 for 1 turn.", 3, 1, 1, 5).fp(3).fx("BOLT_WIDE"));
