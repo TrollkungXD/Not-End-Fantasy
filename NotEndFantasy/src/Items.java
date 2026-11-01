@@ -3,7 +3,7 @@ import java.util.*;
 /** Item catalogue. */
 public final class Items {
     private Items() {}
-    public static final Item POTION = new Item.Heal("Potion", "Most wounded ally restores 20 HP.", 25, 15);
+    public static final Item POTION = new Item.Heal("Potion", "Most wounded ally restores 15 HP.", 25, 15);
     public static final Item HI_POTION = new Item.Heal("Hi-Potion", "Most wounded ally restores 40 HP.", 50, 30);
     public static final Item ELIXIR = new Item.PartyHeal("Elixir", "Every ally restores 20 HP.", 40, 20);
     public static final Item PHOENIX = new Item.Revive("Phoenix Feather", "Revive a fallen ally with 60% HP.", 150, 0.6);
