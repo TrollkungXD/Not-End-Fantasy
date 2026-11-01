@@ -321,9 +321,9 @@ public class Stage {
         s.monsters.add(() -> mage("Tha Despero", 47, 4, 4, 16, 43, new Color(200, 160, 90))
                 .with(new EnemyMove.Restore("Purifying Light", 0.15, 3, 1),
                       new EnemyMove.Afflict("Blinding Light", 0.9, true, EnemyMove.Ailment.BLIND, 0, 2, 90, true, 1), new EnemyMove.Charge("Prophecy of Ruin", 1.8, true, 1), new EnemyMove.Drain("Despair", 1.0, true, 1)));
-        s.setBoss("Gloom Under Night", () -> new Enemy.Boss("Gloom Under Night", 137, 2, 7, 12, 12, 180, new Color(110, 30, 50))
+        s.setBoss("Gloom Under Night", () -> new Enemy.Boss("Gloom Under Night", 147, 2, 7, 12, 12, 180, new Color(110, 30, 50))
                 .with(new EnemyMove.Restore("Ashen Requiem", 0.15, 0.10, 4, 1),
-                      new EnemyMove.Summon("Raise Molten Golem", () -> phys("Molten Golem", 20, 3, 3, 10, 20, new Color(200, 90, 40))
+                      new EnemyMove.Summon("Raise Molten Golem", () -> phys("Molten Golem", 25, 3, 3, 10, 20, new Color(200, 90, 40))
                           .with(new EnemyMove.Afflict("Molten Fist", 0.9, false, EnemyMove.Ailment.BURN, 3, 3, 70, false, 2)), 3, 1),
                       new EnemyMove.Afflict("Gloom Wave", 1.3, true, EnemyMove.Ailment.BURN, 5, 2, 70, true, 2),
                       new EnemyMove.Afflict("Eclipse", 0.5, true, EnemyMove.Ailment.SILENCE, 0, 3, 95, true, 1),
@@ -395,9 +395,9 @@ public class Stage {
         s.monsters.add(() -> phys("Skeleton General", 26, 8, 8, 10, 32, new Color(200, 190, 170))
                 .with(new EnemyMove.Afflict("Battle Cry", 0, false, EnemyMove.Ailment.WEAK, 3, 4, 70, true, 1), new EnemyMove.Rally("Command", 3, 3, 1), new EnemyMove.Strike("General's Edge", 1.4, false, 1, 2),
                       new EnemyMove.Guard("Phalanx", 3, 2, true, 1)));
-        s.setBoss("Knight of Abyss", () -> new Enemy.Boss("Knight of Abyss", 230, 4, 8, 16, 14, 220, new Color(130, 120, 110))
+        s.setBoss("Knight of Abyss", () -> new Enemy.Boss("Knight of Abyss", 230, 4, 8, 16, 14, 190, new Color(130, 120, 110))
                 .with(new EnemyMove.Restore("Abyssal Oath", 0.15, 0.10, 4, 1),
-                      new EnemyMove.Summon("Call Raydric Archer", () -> phys("Raydric Archer", 25, 4, 0, 7, 30, new Color(120, 110, 130))
+                      new EnemyMove.Summon("Call Raydric Archer", () -> phys("Raydric Archer", 32, 4, 0, 7, 30, new Color(120, 110, 130))
                           .with(new EnemyMove.Strike("Arrow Volley", 0.9, false, 3, 4), new EnemyMove.Afflict("Pinning Shot", 0.8, false, EnemyMove.Ailment.STUN, 0, 1, 30, false, 1)), 3, 1),
                       new EnemyMove.Charge("Abyssal Cleave", 1.8, false, 2),
                       new EnemyMove.Afflict("Soul Chain", 1.5, false, EnemyMove.Ailment.STUN, 0, 1, 45, false, 1),
